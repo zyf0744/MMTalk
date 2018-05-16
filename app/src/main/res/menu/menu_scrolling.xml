@@ -3,9 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.zyf.ScrollingActivity">
     <item
-        android:id="@+id/a"
-        android:title="Item" />
+        android:id="@+id/clean"
+        android:contentDescription="清除系统缓存"
+        android:title="清除缓存" />
+
     <item
-        android:id="@+id/b"
-        android:title="Item" />
+        android:id="@+id/changePwd"
+        android:title="修改密码" />
+    <item
+        android:id="@+id/closeVoice"
+        android:title="关闭声音" />
+    <item
+        android:id="@+id/openVoice"
+        android:title="打开声音" />
+
+    <item
+        android:id="@+id/logOut"
+        android:title="退出登录" />
 </menu>

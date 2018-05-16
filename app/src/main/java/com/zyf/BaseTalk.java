@@ -8,6 +8,9 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
@@ -59,7 +62,7 @@ public class BaseTalk extends AppCompatActivity {
 
     int offset =0;// 获取消息的起始位置
     int limit =10;// 获取消息的条数
-
+    int oldVisibleItem= 0;
     protected void  init(){
         JMessageClient.registerEventReceiver(this);
 
@@ -71,21 +74,67 @@ public class BaseTalk extends AppCompatActivity {
         showTxt.setOnScrollListener(new AbsListView.OnScrollListener(){
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                Toast.makeText(getApplicationContext(), "我下拉了", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "我下拉了", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
+                if (firstVisibleItem < oldVisibleItem && firstVisibleItem == 0) {
+                    // 向下滑动
+                    Toast.makeText(getApplicationContext(), "加载更多...", Toast.LENGTH_SHORT).show();
+                    offset  = limit + totalItemCount;
+                    List<Message>  list  =   conversation.getMessagesFromNewest(offset, limit);
+                    Collections.reverse(list);
+                    for(Message m : list){
+                        TextContent textContent = (TextContent) m.getContent();
+                        itemBeanList.add(0, new ItemBean(R.mipmap.ic_launcher,m.getFromID(), textContent.getText().toString(),getDateToString(m.getCreateTime())));
+                        showTxt.setAdapter(new MsgAdapter(getApplicationContext(),itemBeanList));
+                        editText1.setText("");
+                    }
+                }
+                oldVisibleItem = firstVisibleItem;
             }
         });
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_scrolling, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.clean://监听菜单按钮
+                Toast.makeText(getApplicationContext(), "清除日志", Toast.LENGTH_SHORT).show();
+                JMessageClient.deleteSingleConversation(tagetUserName);
+                itemBeanList= new ArrayList<>();
+                showTxt.setAdapter(new MsgAdapter(getApplicationContext(),itemBeanList));
+                break;
+            case R.id.closeVoice://监听菜单按钮
+                Toast.makeText(getApplicationContext(), "已关闭消息声音", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.openVoice://监听菜单按钮
+                Toast.makeText(getApplicationContext(), "已打开消息声音", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.changePwd:
+                Toast.makeText(getApplicationContext(), "修改密码功能开发中，请期待", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.logOut://监听菜单按钮
+                Toast.makeText(getApplicationContext(), "退出", Toast.LENGTH_SHORT).show();
+                JMessageClient.logout();
+                info = null;
+                conversation = null;
+                finish();
+                System.exit(0);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_talk);
-
         init();
 
         //设置ListView的数据适配器
@@ -240,11 +289,12 @@ public class BaseTalk extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        info = JMessageClient.getMyInfo();
         if (null == info) {
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(intent);
         }
+        //info = JMessageClient.getMyInfo();
+
 
       //  tv_header.append("版本号：" + JMessageClient.getSdkVersionString());
         Intent intent = getIntent();
@@ -274,6 +324,7 @@ public class BaseTalk extends AppCompatActivity {
                 firstTime=System.currentTimeMillis();
             }else{
                 JMessageClient.logout();
+                //info = null;
                 finish();
                 System.exit(0);
             }

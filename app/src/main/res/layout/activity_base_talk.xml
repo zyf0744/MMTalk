@@ -51,11 +51,11 @@
 
                 <Button
                     android:id="@+id/button"
-                    android:layout_width="104dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="发送"
-                    tools:text="发送" />
+                    android:text=">"
+                    tools:text=">" />
             </LinearLayout>
         </TableRow>
 
