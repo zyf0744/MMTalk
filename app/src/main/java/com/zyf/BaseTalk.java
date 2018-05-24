@@ -289,6 +289,10 @@ public class BaseTalk extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+
+        checkImg();
+
         if (null == info) {
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(intent);
@@ -311,6 +315,10 @@ public class BaseTalk extends AppCompatActivity {
             }
         }*/
        initData();
+    }
+
+    private void checkImg() {
+
     }
 
 

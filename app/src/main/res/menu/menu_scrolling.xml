@@ -5,7 +5,8 @@
     <item
         android:id="@+id/clean"
         android:contentDescription="清除系统缓存"
-        android:title="清除缓存" />
+        android:title="清除缓存"
+        />
 
     <item
         android:id="@+id/changePwd"
