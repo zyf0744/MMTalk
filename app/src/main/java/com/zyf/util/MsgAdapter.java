@@ -65,11 +65,10 @@ public class MsgAdapter extends BaseAdapter {
             contentTextView = (TextView) view.findViewById(R.id.tv_content);
             dateTextView = (TextView) view.findViewById(R.id.tv_date);
             imageView = (ImageView) view.findViewById(R.id.iv_image);
-
             imageView.setImageResource(R.drawable.women);
         }
         else{
-            view = mInflater.inflate(R.layout.item_left,null);
+            view = mInflater.inflate(R.layout.item_right,null);
         }
 
         /**
@@ -83,8 +82,11 @@ public class MsgAdapter extends BaseAdapter {
          * 设置控件的对应属性值 
          */
         //titleTextView.setText(bean.userName);
+        if(titleTextView!=null)
         titleTextView.setText("");
+        if(contentTextView!=null)
         contentTextView.setText(bean.itemContent);
+        if(dateTextView!=null)
         dateTextView.setText(bean.dateString);
         return view;
     }

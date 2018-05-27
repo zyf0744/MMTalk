@@ -1,5 +1,6 @@
 package com.zyf;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -63,6 +64,10 @@ public class BaseTalk extends AppCompatActivity {
     int offset =0;// 获取消息的起始位置
     int limit =10;// 获取消息的条数
     int oldVisibleItem= 0;
+
+
+    //public static boolean isActive; //全局变量
+    Intent intentAd= null;
     protected void  init(){
         JMessageClient.registerEventReceiver(this);
 
@@ -108,6 +113,8 @@ public class BaseTalk extends AppCompatActivity {
             case R.id.clean://监听菜单按钮
                 Toast.makeText(getApplicationContext(), "清除日志", Toast.LENGTH_SHORT).show();
                 JMessageClient.deleteSingleConversation(tagetUserName);
+                JMessageClient.deleteSingleConversation(tagetUserName,"da3a531d69e0ab66664f3493");
+
                 itemBeanList= new ArrayList<>();
                 showTxt.setAdapter(new MsgAdapter(getApplicationContext(),itemBeanList));
                 break;
@@ -289,36 +296,27 @@ public class BaseTalk extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-
-        checkImg();
-
+        intentAd=getIntent();
+        String adFlag=intentAd.getStringExtra("adFlag");
+        if(!"true".equals(adFlag)) {
+            checkImg();
+        }
         if (null == info) {
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(intent);
         }
-        //info = JMessageClient.getMyInfo();
-
-
-      //  tv_header.append("版本号：" + JMessageClient.getSdkVersionString());
         Intent intent = getIntent();
         Gson gson = new Gson();
         List<DeviceInfo> deviceInfos = gson.fromJson(intent.getStringExtra("deviceInfos"), new TypeToken<List<DeviceInfo>>() {}.getType());
-      /*  if (deviceInfos != null) {
-            for (DeviceInfo deviceInfo : deviceInfos) {
-               // Toast.makeText(BaseTalk.this, deviceInfo.toString(),Toast.LENGTH_SHORT).show();
-              //  Log.i("1111",deviceInfo.toString());
-              //  tv_deviceInfo.append("设备登陆记录:\n");
-//                tv_deviceInfo.append("设备ID: " + deviceInfo.getDeviceID() + " 平台：" + deviceInfo.getPlatformType()
-//                        + " 上次登陆时间:" + deviceInfo.getLastLoginTime() + "登陆状态:" + deviceInfo.isLogin() + "在线状态:" + deviceInfo.getOnlineStatus()
-//                        + " flag:" + deviceInfo.getFlag());
-            }
-        }*/
+
        initData();
     }
 
     private void checkImg() {
-
+        // 给bnt1添加点击响应事件
+        Intent intent =new Intent(getApplicationContext(),AdActivity.class);
+        //启动
+        startActivity(intent);
     }
 
 
@@ -340,8 +338,12 @@ public class BaseTalk extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-    public String getDateToString(long milSecond) {
+    @Override
+    protected void onStop() {
+        intentAd.removeExtra("adFlag");
+        super.onStop();
+    }
+     public String getDateToString(long milSecond) {
         Date date = new Date(milSecond);
         SimpleDateFormat format = null;
         //当前时间

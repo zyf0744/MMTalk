@@ -41,10 +41,8 @@
         android:name="com.taobao.android.hotfix.RSASECRET"
         android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9Y7K65wzohHDx+YR7xKmvKvX0uP7MSzHS5O+qqr5zxd+89VD3LB2BMjZsgAL4cz2ijTWIdyc52EWp5HAf1AoOdMOXyt/b3NQ5a9VEKipYkHjVPZOAQXzYoUv0l1bXiJg2zzuKxZBli5JX1miQATn/K6Ym6ZH/XCgtsYLH5WCl5SmasgbNWcGlHo8WjCfDIkY5J+7zs2laKetkIxLO8U1Gje0D1AbrBA3mVTTeWmlkyFZHfSG1EvsfC/MC2tC4rc+73+uynehkm9dLC8ejc7K+hPZrH8H5qIl+gX2LxWQSUYU3qGgH4yTkEoVIyvuiaQAQnPSEvbEAOFWz11hh9CSbAgMBAAECggEAKRlPmfu182d6UyiAtZMx949tHJRgxtiykT+ZOwIenmUcbpcV4O2z4WuSH+2Pt3bas0HNkjW5T3Y9d+bY5i9Pl1+DapdeCQpdC7D48PfthJalgjEAp16OxzwJjaSh9dfwoERMeYryEPc+5MzkmAuMGHHSdrNNOYs4NOJGrTZ7yMQYE5WAVqdvhLL+JSIqBwII6hF6VQ2xga9pXmhSUqfMf6GwBGI7iijKdcyCNPGcUjqC8eIAUDpffutCikGO0FoYRGaRQA5tgmpsNXCoRGYa5aJbqD8gS0GrGSxsTFvvRU5n9brYp4gI+IANkGDX71rcYWitEOamyXoKEy8AS4ZR0QKBgQD3PjRWTIsbvZQwLl8sNUrZ/3fYPCQRaVDqeJ/Zt8NTmVcbprnDcJQRhjCzflSdpUHwHqIifM8QmhW1gdjZzm6I2BRTxTP8IecuSP7kVu4F9yNw1MLk08mkv4qQp+kGLqz/puB4T6o7uPsCIv48y7bvUDkSTkBAiHAZ5Jwu8ot/tQKBgQDEGOzuvs3jkiyJvs41UFn2UldXE5Owg2zpMuhDcO1C8rEeOT3VYanBbpjuW9BZKUeXzBnZs/yj07euVqIcm/cxUQq+pxxHCe8dJfab2tNgdltqG6iio9+SN67cmo85Zfhzx2EcpDrGGBnjHg1llvXSwPJ5K7sdKQi3/UreE5ilDwKBgQCKtrKkbGNrl+xpL8sjwW6Sajsx7WQLBLxqIG0GuIv0/kYZ9GuqlCHuxwvR2KHepJYfAwDSOpXt6ZUedZBVevUW/6w/55cn8VmD5V5ke8UlQaf3qNcDjTNHpFM4n4wkdNGIyXaM6Z1Hzpu9ciaTs3OaRrcOZyqzShki3dkmmdvcNQKBgAE2/lDEUdY1E52O1wwxgT0raWsarfGL/uK69AFm87FUe5BqXl2yCzEtlDj1zKagwNbJ5ucYXFpPd3XXB44R0Ug27lAcDOrLvvV5RLvWcTTJxuszXKoVRc9MFQM82eJLJWziMVHSGqMbhx2HFCIq+z7g/x+NC820cV9ibFJP4MQ1AoGAEAqKZgCYDTAQ1cwicrf4N3bzvZJ5lsJJBaKhwkWi/13IL7Fk4hIDb0Va6U0fmSpVPokEOpdgczBQUr8FX2wnv8UWoBNeaoWaEyeNah0OwKKhjEWChaDSnG9U9RYY3kmMfu77EY4tQEU5x0b8fl0TqcpSs8lHWtjpsU/PJ52F/24=" />
 
-
-
     <application
-        android:name="com.zyf.BaseApplication"
+        android:name=".BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -131,7 +129,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".BaseTalk" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".AdActivity"></activity>
     </application>
 
 </manifest>
