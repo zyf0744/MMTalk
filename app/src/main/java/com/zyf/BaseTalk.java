@@ -1,6 +1,7 @@
 package com.zyf;
 
 import android.app.ActivityManager;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -114,15 +115,16 @@ public class BaseTalk extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "清除日志", Toast.LENGTH_SHORT).show();
                 JMessageClient.deleteSingleConversation(tagetUserName);
                 JMessageClient.deleteSingleConversation(tagetUserName,"da3a531d69e0ab66664f3493");
-
                 itemBeanList= new ArrayList<>();
                 showTxt.setAdapter(new MsgAdapter(getApplicationContext(),itemBeanList));
                 break;
             case R.id.closeVoice://监听菜单按钮
                 Toast.makeText(getApplicationContext(), "已关闭消息声音", Toast.LENGTH_SHORT).show();
+                JMessageClient.setNotificationFlag(JMessageClient.FLAG_NOTIFY_WITH_LED|JMessageClient.FLAG_NOTIFY_WITH_VIBRATE);
                 break;
             case R.id.openVoice://监听菜单按钮
                 Toast.makeText(getApplicationContext(), "已打开消息声音", Toast.LENGTH_SHORT).show();
+                JMessageClient.setNotificationFlag(JMessageClient.FLAG_NOTIFY_WITH_SOUND|JMessageClient.FLAG_NOTIFY_WITH_LED|JMessageClient.FLAG_NOTIFY_WITH_VIBRATE);
                 break;
             case R.id.changePwd:
                 Toast.makeText(getApplicationContext(), "修改密码功能开发中，请期待", Toast.LENGTH_SHORT).show();
