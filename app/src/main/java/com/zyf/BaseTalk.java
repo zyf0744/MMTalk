@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.google.gson.jpush.Gson;
 import com.google.gson.jpush.reflect.TypeToken;
 import com.qiniu.android.jpush.storage.Recorder;
+import com.qiniu.android.jpush.utils.StringUtils;
 import com.zyf.util.ItemBean;
 import com.zyf.util.MsgAdapter;
 
@@ -74,6 +75,15 @@ public class BaseTalk extends AppCompatActivity {
 
         itemBeanList  = new ArrayList<>();
         editText1 =  (EditText)findViewById(R.id.txt);
+        editText1.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+//文本显示的位置在EditText的最上方
+        //editText1.setGravity(Gravity.TOP);
+       // editText.setText("1233333333333333333333333333333333333333333333333333333333333333333333333333");
+//改变默认的单行模式
+        editText1.setSingleLine(false);
+//水平滚动设置为False
+        editText1.setHorizontallyScrolling(false);
+        editText1.setVerticalScrollBarEnabled(true);
         showTxt = (ListView)findViewById(R.id.showTxt);
         showTxt.setAdapter(new MsgAdapter(this,itemBeanList));
         info = JMessageClient.getMyInfo();
@@ -223,7 +233,7 @@ public class BaseTalk extends AppCompatActivity {
         Collections.reverse(list);
         for(Message m : list){
                 TextContent textContent = (TextContent) m.getContent();
-                itemBeanList.add(new ItemBean(R.mipmap.ic_launcher,m.getFromID(), textContent.getText().toString(),getDateToString(m.getCreateTime())));
+                itemBeanList.add(new ItemBean(R.mipmap.ic_launcher, m.getFromID()==null||"".equals(m.getFromID())?userName:m.getFromID(), textContent.getText().toString(),getDateToString(m.getCreateTime())));
                 showTxt.setAdapter(new MsgAdapter(getApplicationContext(),itemBeanList));
                 showTxt.setSelection(showTxt.getBottom());
                 editText1.setText("");

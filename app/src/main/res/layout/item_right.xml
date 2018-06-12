@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/tv_title1"
-        android:layout_width="208dp"
+        android:layout_width="108dp"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -29,10 +29,11 @@
         android:layout_below="@id/tv_title1"
         android:layout_marginStart="-384dp"
         android:layout_toEndOf="@id/iv_image1"
+        android:autoText="true"
         android:text="Content"
         android:textAlignment="textEnd"
         android:textColor="@android:color/background_dark"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_date1"
@@ -43,6 +44,6 @@
         android:layout_marginEnd="94dp"
         android:text="date"
         android:textColor="@android:color/darker_gray"
-        android:textSize="20sp"
+        android:textSize="16sp"
         tools:textColor="@android:color/darker_gray" />
 </RelativeLayout>

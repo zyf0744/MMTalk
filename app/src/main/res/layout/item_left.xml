@@ -18,7 +18,7 @@
         android:gravity="center"
         android:text="Title"
         android:textColor="@android:color/background_dark"
-        android:textSize="25sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/tv_content"
@@ -27,9 +27,9 @@
         android:layout_below="@id/tv_title"
         android:layout_toEndOf="@id/iv_image"
         android:autoText="true"
-        android:textColor="@android:color/background_dark"
         android:text="Content"
-        android:textSize="20sp" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_date"
@@ -40,5 +40,5 @@
         android:layout_marginStart="70dp"
         android:text="date"
         android:textColor="@android:color/darker_gray"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 </RelativeLayout>
